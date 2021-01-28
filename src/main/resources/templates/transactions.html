@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Transactions</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="script.js"></script>
+</head>
+<body class="bg-dark text-white" style="padding-top: 80px; margin: 30px">
+<nav class="navbar p-3 mb-2 fixed-top navbar-expand-lg navbar-dark bg-dark bg-gradient">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            Home budget
+        </a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/transactions">Transactions</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<form th:action="@{/}" method="post">
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="firstKeyword" value="Income">
+        <label class="form-check-label">Income</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="secondKeyword" value="Expense">
+        <label class="form-check-label">Expenses</label>
+    </div>
+    <a class="btn btn-primary" type="submit" style="background-color: #dc8434; border: none">
+        <img src="reload.svg" alt="" width="24" height="24">Reload
+    </a>
+</form>
+<table class="table text-white">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction, iter : ${transactions}">
+        <th scope="row" th:text="${transaction.id}"></th>
+        <td th:text="${transaction.type}"></td>
+        <td th:text="${transaction.description}"></td>
+        <td th:text="${transaction.amount}"></td>
+        <td th:text="${transaction.date}"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${transaction.id}}"> <img src="edit-transaction.svg" alt="" width="24" height="24"></a>
+            &nbsp;&nbsp;&nbsp;
+            <a th:href="@{'/delete/' + ${transaction.id}}"> <img src="delete-transaction.svg" alt="" width="24"
+                                                                 height="24"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="col-12" style="margin-top: 15px; float: right; text-align: right">
+    <a th:href="@{new}" class="btn btn-primary" type="submit" style="background-color: darkgreen; border: none">
+        <img src="add-transaction.svg" alt="" width="16" height="16"> Add
+    </a>
+</div>
+</body>
+</html>
