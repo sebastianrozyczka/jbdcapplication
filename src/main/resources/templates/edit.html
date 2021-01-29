@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Liquor Store:Edit product</title>
-    <link rel="icon" href="beer-yellow.svg" type="image/svg">
+    <title>Edit transaction</title>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -23,8 +22,8 @@
         <div class="col-12" style="margin-bottom: 10px">
             <label class="form-label" style="width: inherit;">Type
                 <select class="form-select" aria-label="Default select example" th:field="*{type}">
-                    <option th:value="Income">Income</option>
-                    <option th:value="Expense">Expense</option>
+                    <option th:value="INCOME">Income</option>
+                    <option th:value="EXPENSE">Expense</option>
                 </select>
             </label>
         </div>

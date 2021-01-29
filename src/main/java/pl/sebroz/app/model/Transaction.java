@@ -5,14 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Transaction {
     private int id;
-    private String type;
+    private Type type;
     private String description;
-    private double amount;
+    private BigDecimal amount;
     private String date;
 }

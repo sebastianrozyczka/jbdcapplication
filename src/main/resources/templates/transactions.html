@@ -16,19 +16,19 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/transactions">Transactions</a>
+                    <a class="nav-link active">Transactions</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<form th:action="@{/}" method="post">
+<form action="/" method="post">
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="firstKeyword" value="Income">
+        <input class="form-check-input" type="checkbox" name="check" value="INCOME">
         <label class="form-check-label">Income</label>
     </div>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" name="secondKeyword" value="Expense">
+        <input class="form-check-input" type="checkbox" name="check" value="EXPENSE">
         <label class="form-check-label">Expenses</label>
     </div>
     <a class="btn btn-primary" type="submit" style="background-color: #dc8434; border: none">
@@ -49,7 +49,7 @@
     <tbody>
     <tr th:each="transaction, iter : ${transactions}">
         <th scope="row" th:text="${transaction.id}"></th>
-        <td th:text="${transaction.type}"></td>
+        <td th:text="${transaction.type.toString()}"></td>
         <td th:text="${transaction.description}"></td>
         <td th:text="${transaction.amount}"></td>
         <td th:text="${transaction.date}"></td>

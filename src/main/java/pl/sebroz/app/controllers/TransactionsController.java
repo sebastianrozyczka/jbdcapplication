@@ -3,9 +3,9 @@ package pl.sebroz.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import pl.sebroz.app.model.Transaction;
 import pl.sebroz.app.dao.TransactionDAO;
+import pl.sebroz.app.model.Type;
 
 import java.util.List;
 
@@ -17,13 +17,11 @@ public class TransactionsController {
         this.transactionDAO = transactionDAO;
     }
 
-    @GetMapping("/")
-    public String homePage(Model model, @RequestParam(name = "firstKeyword", required = false) String firstKeyword,
-                           @RequestParam(name = "secondKeyword", required = false) String secondKeyword) {
-        List<Transaction> transactionList = transactionDAO.list(firstKeyword, secondKeyword);
+    @RequestMapping("/")
+    public String homePage(Model model, @RequestParam(name = "check", required = false) Type type) {
+        List<Transaction> transactionList = transactionDAO.listByType(type);
         model.addAttribute("transactions", transactionList);
-        model.addAttribute("firstKeyword", firstKeyword);
-        model.addAttribute("secondKeyword", secondKeyword);
+        model.addAttribute("check", type);
 
         return "transactions";
     }
@@ -44,12 +42,11 @@ public class TransactionsController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView editTransaction(@PathVariable("id") int id) {
-        ModelAndView modelAndView = new ModelAndView("edit");
+    public String editTransaction(Model model, @PathVariable("id") int id) {
         Transaction transaction = transactionDAO.get(id);
-        modelAndView.addObject("transaction", transaction);
+        model.addAttribute("transaction", transaction);
 
-        return modelAndView;
+        return "edit";
     }
 
     @PostMapping("/update")
